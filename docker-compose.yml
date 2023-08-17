@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./:/var/www
+            - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+        ports:
+            - 8000:80
+        depends_on:
+            - app
+        container_name: leadbros_nginx2
+
+    app:
+        build:
+            context: .
+            dockerfile: _docker/app/Dockerfile
+        volumes:
+            - ./:/var/www
+        #    depends_onds_on:
+        #      - db
+        container_name: callJournal_app
+
+  db:
+    image: mysql:8.0
+    restart: on-failure
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: callJournal
+      MYSQL_ROOT_PASSWORD:
+
+    ports:
+      - 8104:3306
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: callJournal_db
