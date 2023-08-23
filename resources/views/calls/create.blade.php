@@ -21,9 +21,7 @@
                 <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
         </select>
-        @error('call_to')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+
 
         <select class="form-control mb-4" name ="from_operator">
             <option value="" selected>Оператор звонившего</option>

@@ -11,8 +11,19 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <input-mask> </input-mask>
 
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Номер телефона') }}</label>
+
+                            <div class="col-md-6">
+                                <phone-mask :operators="{{$operators}}"></phone-mask>
+                                @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>

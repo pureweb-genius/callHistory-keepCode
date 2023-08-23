@@ -9,14 +9,21 @@ class OperatorSeeder extends Seeder
     public function run()
     {
         Operator::create([
-            'name' => 'Operator A',
-            'prefix' => '+7775',
+            'name' => 'Beeline',
+            'prefix' => '+7(777)',
         ]);
 
         Operator::create([
-            'name' => 'Operator B',
-            'prefix' => '+7776',
+            'name' => 'Active',
+            'prefix' => '+7(775)',
         ]);
+
+        Operator::create([
+            'name' => 'Tele2',
+            'prefix' => '+7(747)',
+        ]);
+
+
 
     }
 }

@@ -3,13 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Operator;
+use App\Services\OperatorService;
 use Illuminate\Http\Request;
 
 class OperatorController extends Controller
 {
+    protected OperatorService $operatorService;
+    public function __construct(OperatorService $operatorService)
+    {
+        $this->operatorService = $operatorService;
+    }
+
     public function index()
     {
-        $operators = Operator::all();
+        $operators = $this->operatorService->getAll();
         return view('operators.index', compact('operators'));
     }
 
@@ -20,20 +27,18 @@ class OperatorController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'prefix' => 'required|string',
-        ]);
-
-        Operator::create($data);
+        $this->operatorService->store($request);
 
         return redirect()->route('operator.index');
     }
 
     public function destroy($id)
     {
-        $operator = Operator::findOrFail($id);
-        $operator->delete();
+        $this->operatorService->destroy($id);
+
         return redirect()->route('operator.index');
     }
+
+
+
 }

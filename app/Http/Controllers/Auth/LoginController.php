@@ -44,5 +44,14 @@ class LoginController extends Controller
         return 'phone';
     }
 
+    public function showLoginForm()
+    {
+        $operators = \App\Models\Operator::all();
+
+        return view('auth.login', compact('operators'));
+    }
+
+
+
 
 }

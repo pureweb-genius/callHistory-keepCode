@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('operators', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('prefix');
+            $table->string('prefix')->unique();
             $table->timestamps();
         });
     }

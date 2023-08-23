@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Operator;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -69,5 +70,12 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'phone'=>$data['phone'],
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        $operators = Operator::all();
+
+        return view('auth.register',compact('operators'));
     }
 }

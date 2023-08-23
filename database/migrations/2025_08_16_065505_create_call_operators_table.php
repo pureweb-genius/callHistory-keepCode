@@ -20,6 +20,7 @@ return new class extends Migration
 
            $table->foreign('from_operator')->references('id')->on('operators')->onDelete('cascade');
            $table->foreign('to_operator')->references('id')->on('operators')->onDelete('cascade');
+           $table->foreign('call_id')->references('id')->on('calls')->onDelete('cascade');
         });
     }
 
