@@ -18,7 +18,7 @@ class CallService
         $this->callRepository = $callRepository;
     }
 
-    public function index()
+    public function getAll()
     {
         // Retrieve all calls with information about associated users and operators
         $calls = Call::with(['userFrom', 'userTo', 'operators'])->get();
@@ -53,13 +53,14 @@ class CallService
 
         DB::beginTransaction();
         try {
-            // Create a Call object
-            $call = Call::create([
+            // Create a Call object using repository
+            $call = $this->callRepository->create([
                 'call_from' => $data['call_from'],
                 'call_to' => $data['call_to'],
                 'duration' => $data['duration'],
                 'cost' => $cost,
             ]);
+
 
             // Create a CallOperator object
             CallOperator::create([

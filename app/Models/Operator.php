@@ -13,8 +13,31 @@ class Operator extends Model
         'name',
         'prefix',
     ];
-    public function calls()
+
+    public function callOperatorsFrom()
     {
-        return $this->hasMany(Call::class);
+        return $this->hasMany(CallOperator::class, 'from_operator');
     }
+
+    public function callOperatorsTo()
+    {
+        return $this->hasMany(CallOperator::class, 'to_operator');
+    }
+
+
+    public function callsFrom()
+    {
+        return $this->hasManyThrough(Call::class, CallOperator::class, 'from_operator', 'id', 'id', 'call_id');
+    }
+
+    public function callsTo()
+    {
+        return $this->hasManyThrough(Call::class, CallOperator::class, 'to_operator', 'id', 'id', 'call_id');
+    }
+
+
+
+
+
+
 }

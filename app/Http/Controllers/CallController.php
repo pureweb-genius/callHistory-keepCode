@@ -24,7 +24,7 @@ class CallController extends Controller
 
     public function index()
     {
-        $calls = $this->callService->index();
+        $calls = $this->callService->getAll();
 
         return view('calls.index', compact('calls'));
     }

@@ -5,18 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CallOperator extends Model {
+class CallOperator extends Model
+{
 
     protected $with = ['from', 'to'];
     protected $fillable = ['call_id', 'from_operator', 'to_operator'];
 
-    public function from() {
+    public function from()
+    {
         return $this->belongsTo(Operator::class, 'from_operator');
     }
 
-    public function to() {
+    public function to()
+    {
         return $this->belongsTo(Operator::class, 'to_operator');
     }
+
+    public function call()
+    {
+        return $this->belongsTo(Call::class, 'call_id');
+    }
+
 }
 
 
